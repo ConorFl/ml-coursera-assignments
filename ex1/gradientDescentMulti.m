@@ -20,9 +20,8 @@ for iter = 1:num_iters
 
 
 
-
-
-
+    diffs_vector = X*theta - y;
+    theta = theta - alpha/m*(sum(diffs_vector.*X, 1)')
 
 
 
