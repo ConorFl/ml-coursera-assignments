@@ -27,7 +27,7 @@ costRegTerm = lambda / (2 * m) * sum(theta(2:length(theta), :).^2);
 J = J + costRegTerm;
 
 % Original grad
-grad = 1 / m * (sum((sigmoid(X * theta) - y) .* X)')
+grad = 1 / m * (sum((sigmoid(X * theta) - y) .* X)');
 % Regularization term: for all theta except theta(1)
 gradientDescentRegTerm = lambda / m * ([0; theta(2:length(theta), :)]);
 % grad with regularization
