@@ -49,7 +49,9 @@ for j = 1:display_rows
 end
 
 % Display Image
-h = imagesc(display_array, [-1 1]);
+% Below edit fixes issue of numbers being upside down (https://www.coursera.org/learn/machine-learning/programming/Y54Zu/multi-class-classification-and-neural-networks/discussions/-nvivv-OEeWlQw7xlSHNnQ)
+% h = imagesc(display_array, [-1 1]);
+h = imagesc(flipud(display_array), [-1 1]);
 
 % Do not show axis
 axis image off
