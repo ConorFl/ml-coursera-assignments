@@ -21,13 +21,29 @@ p = zeros(size(X, 1), 1);
 %       can use max(A, [], 2) to obtain the max for each row.
 %
 
+% x_col_count = size(X, 2)
+% x_row_count = size(X, 1)
+% theta_1_col_count = size(Theta1, 2)
+% theta_1_row_count = size(Theta1, 1)
+
+X = [ones(m, 1) X];
+
+z_2 = X * Theta1';
+a_2 = sigmoid(z_2);
+a_2 = [ones(m, 1) a_2];
 
 
+% z_2_col_count = size(z_2, 2)
+% z_2_row_count = size(z_2, 1)
+% theta_2_col_count = size(Theta2, 2)
+% theta_2_row_count = size(Theta2, 1)
 
+z_3 = a_2 * Theta2';
+a_3 = sigmoid(z_3);
+% a_3_col_count = size(a_3, 2)
+% a_3_row_count = size(a_3, 1)
 
-
-
-
+[a, p] = max(a_3, [], 2);
 
 % =========================================================================
 
