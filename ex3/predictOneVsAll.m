@@ -32,11 +32,11 @@ X = [ones(m, 1) X];
 
 % row_i = [P(x_i == 1) P(x_i == 2) ... P(x_i == 10)]
 % col_i = [P(x_1 == i); P(x_2 == i); ... P(x_m == i)]
-probabilitiesMatrix = X * all_theta'
+probabilitiesMatrix = X * all_theta';
 
 % a = max values of each row (don't actually need this value)
 % p = column index of each max values in a
-[a, p] = max(probabilitiesMatrix, [], 2)
+[a, p] = max(probabilitiesMatrix, [], 2);
 
 
 
