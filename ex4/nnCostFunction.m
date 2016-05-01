@@ -55,6 +55,14 @@ for i = 1:m
 end
 
 J = J / m;
+Theta1_without_bias = Theta1; % Exclude bias term from regularization
+Theta1_without_bias(:, 1) = [];
+Theta2_without_bias = Theta2; % Exclude bias term from regularization
+Theta2_without_bias(:, 1) = [];
+
+regTerm = lambda / (2 * m) * (sum(Theta1_without_bias(:) .^ 2) + sum(Theta2_without_bias(:) .^ 2));
+
+J = J + regTerm;
 
 
 % Part 2: Implement the backpropagation algorithm to compute the gradients
