@@ -24,7 +24,7 @@ Theta2 = reshape(nn_params((1 + (hidden_layer_size * (input_layer_size + 1))):en
 
 % Setup some useful variables
 m = size(X, 1);
-         
+
 % You need to return the following variables correctly 
 J = 0;
 Theta1_grad = zeros(size(Theta1));
@@ -40,12 +40,12 @@ Theta2_grad = zeros(size(Theta2));
 %         computed in ex4.m
 %
 A_1 = [ones(m, 1) X]; % Add ones
-X_2 = A_1 * Theta1';
-A_2 = sigmoid(X_2);
+Z_2 = A_1 * Theta1';
+A_2 = sigmoid(Z_2);
 a_2_row_count = size(A_2, 1);
 A_2 = [ones(a_2_row_count, 1) A_2]; % Add ones
-X_3 = A_2 * Theta2';
-A_3 = sigmoid(X_3);
+Z_3 = A_2 * Theta2';
+A_3 = sigmoid(Z_3);
 
 for i = 1:m
 	pred_vect = A_3(i,:)';
@@ -80,6 +80,36 @@ J = J + regTerm;
 %               over the training examples if you are implementing it for the 
 %               first time.
 %
+
+% Use A_3 already computed in Part 1
+
+Y_Matrix = [];
+for i = 1:m
+  Y_Matrix = [Y_Matrix; (1:num_labels == y(i))];
+end
+
+D_3 = A_3 - Y_Matrix;
+
+D_2 = D_3 * Theta2;
+D_2 = (D_2(:, 2:end)) .* sigmoidGradient(Z_2);
+
+Theta2_grad = (1 / m) * D_3' * A_2;
+
+Theta1_grad = (1 / m) * D_2' * A_1;
+
+% Failed/confused attempt one by one
+% for i = 1:m
+%   pred_vect = A_3(i, :)';
+%   z_2 = Z_2(i, :)';
+%   y_vect = (1:num_labels)' == y(i);
+%   d_3 = pred_vect - y_vect;
+
+%   % d_2 = (Theta2' * d_3)(2:end);
+%   % Remove bias element
+%   d_2 = (Theta2' * d_3) .* sigmoidGradient(Z_2);
+
+% end
+
 % Part 3: Implement regularization with the cost function and gradients.
 %
 %         Hint: You can implement this around the code for
