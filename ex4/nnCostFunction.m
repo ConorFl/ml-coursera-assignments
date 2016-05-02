@@ -118,20 +118,13 @@ Theta1_grad = (1 / m) * D_2' * A_1;
 %               and Theta2_grad from Part 2.
 %
 
+Theta2_reg_factor = lambda / m * Theta2
+Theta2_reg_factor(:, 1) = 0; % Don't regularize bias term
+Theta2_grad = Theta2_grad + Theta2_reg_factor;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+Theta1_reg_factor = lambda / m * Theta1;
+Theta1_reg_factor(:, 1) = 0; % Don't regularize bias term
+Theta1_grad = Theta1_grad + Theta1_reg_factor;
 
 
 
