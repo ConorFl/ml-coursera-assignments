@@ -26,7 +26,10 @@ J = sumOfSquaredErrors + regTerm;
 
 
 
+gradWithoutReg = sum((1 / m) * (X * theta - y) .* X)';
+gradRegTerm = [0; lambda / m * theta(2:end)];
 
+grad = gradWithoutReg + gradRegTerm;
 
 
 
@@ -35,6 +38,6 @@ J = sumOfSquaredErrors + regTerm;
 
 % =========================================================================
 
-grad = grad(:);
+% grad = grad(:);
 
 end
