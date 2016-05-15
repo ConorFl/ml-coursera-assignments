@@ -8,8 +8,9 @@ function [C, sigma] = dataset3Params(X, y, Xval, yval)
 %
 
 % You need to return the following variables correctly.
+% Max values found by running code commented out below (testing range of values)
 C = 1;
-sigma = 0.3;
+sigma = 0.1;
 
 % ====================== YOUR CODE HERE ======================
 % Instructions: Fill in this function to return the optimal C and sigma
@@ -23,9 +24,33 @@ sigma = 0.3;
 %        mean(double(predictions ~= yval))
 %
 
+% minPredictionError = 1;
+% cRange = [0.01, 0.03, 0.1, 0.3, 1, 3, 10, 30];
+% sigmaRange = [0.01, 0.03, 0.1, 0.3, 1, 3, 10, 30];
+% attempt = 0
+% model = svmTrain(X, y, 0.01, @(x1, x2) gaussianKernel(x1, x2, 0.01));
+% predictions = svmPredict(model, Xval);
+% predError = mean(double(predictions ~= yval))
 
-
-
+% for c = cRange
+% 	for s = sigmaRange
+% 		attempt = attempt + 1
+% 		model = svmTrain(X, y, c, @(x1, x2) gaussianKernel(x1, x2, s));
+% 		predictions = svmPredict(model, Xval);
+% 		c
+% 		s
+% 		predError = mean(double(predictions ~= yval))
+% 		if minPredictionError >= predError
+% 			minPredictionError = predError
+% 			C = c
+% 			sigma = s
+% 			"Maxfound"
+% 		end
+% 	end
+% end
+% "Returning"
+% C
+% sigma
 
 
 
