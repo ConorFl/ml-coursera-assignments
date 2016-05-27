@@ -20,8 +20,6 @@ idx = zeros(size(X,1), 1);
 %
 % Note: You can use a for-loop over the examples to compute this.
 %
-X
-centroids
 
 for i = 1:size(X,1)
 	% Get row vector of element x_i

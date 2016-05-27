@@ -25,11 +25,14 @@ centroids = zeros(K, n);
 %
 % Note: You can use a for-loop over the centroids to compute this.
 %
-
-
-
-
-
+for i = 1:K
+	% Get points associated with centroid i
+	points = X(idx == i, :);
+	% Sum all elements to find mean
+	total = sum(points, 1);
+	% Take average
+	centroids(i, :) = total / size(points, 1);
+end
 
 
 
