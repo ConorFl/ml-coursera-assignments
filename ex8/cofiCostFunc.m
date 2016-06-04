@@ -14,6 +14,15 @@ Theta = reshape(params(num_movies*num_features+1:end), ...
             
 % You need to return the following values correctly
 J = 0;
+% Get errors
+errors = X * (Theta') - Y;
+% Filter unseen movies (why does ths have non-zero y values for movies not seen?)
+filtered = errors .* R;
+% Square and sum all values
+J = 1 / 2 * sum(sum(filtered .^ 2))
+
+
+
 X_grad = zeros(size(X));
 Theta_grad = zeros(size(Theta));
 
