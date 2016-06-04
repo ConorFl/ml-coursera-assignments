@@ -13,10 +13,13 @@ function [mu sigma2] = estimateGaussian(X)
 % You should return these values correctly
 mu = zeros(n, 1);
 
+% Simple summing works (vertically)
 mu = sum(X / m)';
 
 sigma2 = zeros(n, 1);
+% Take the difference of mu and square elements
 sigma2 = (X - mu') .^ 2;
+% Find average (using 1 / m, not 1 / (m - 1))
 sigma2 = sum(sigma2 / m)';
 
 % ====================== YOUR CODE HERE ======================
