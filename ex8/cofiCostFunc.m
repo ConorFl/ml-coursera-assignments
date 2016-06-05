@@ -20,11 +20,42 @@ errors = X * (Theta') - Y;
 filtered = errors .* R;
 % Square and sum all values
 J = 1 / 2 * sum(sum(filtered .^ 2))
-
-
+regTerm = lambda / 2 * sum(sum(Theta .^ 2)) + lambda / 2 * sum(sum(X .^ 2))
+J = J + regTerm;
 
 X_grad = zeros(size(X));
+
+for i = 1:num_movies
+	idx = find(R(i, :) == 1);
+	Theta_temp = Theta(idx, :);
+	Y_temp = Y(i, idx);
+	foo = (X(i, :) * (Theta_temp') - Y_temp) * Theta_temp;
+	X_grad(i, :) = foo + lambda * X(i, :);
+end
+
 Theta_grad = zeros(size(Theta));
+for i = 1:num_users
+	idx = find(R(:, i) == 1); % Find movies user saw
+	X_temp = X(idx, :);
+	Theta_temp = Theta(i, :);
+	Y_temp = Y(idx, i);
+	foo = X_temp' * ((X_temp * (Theta_temp')) - Y_temp);
+	Theta_grad(i, :) = foo + lambda * Theta(i, :)';
+end
+
+
+% filtered = errors .* R;
+
+% X: num_movies x num_attributes
+% Theta: num_people x num_attributes
+% R: num_movies x num_people
+% Y: num_movies x num_people
+
+% X_grad: num_movies x num_attributes
+% Theta_grade: num_people x num_attributes
+
+
+
 
 % ====================== YOUR CODE HERE ======================
 % Instructions: Compute the cost function and gradient for collaborative
